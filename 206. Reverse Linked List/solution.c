@@ -17,3 +17,23 @@ public:
         return p;
     }
 };
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head == NULL || head->next == NULL) {
+            return head;
+        }    
+        ListNode* prev=NULL;
+        ListNode* cur=head;
+        while(cur != NULL) {
+            ListNode* temp = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = temp;
+                
+        }
+        return prev;
+        
+    }
+};
