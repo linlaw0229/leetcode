@@ -7,6 +7,7 @@ Note: You may assume that n is not less than 2 and not larger than 58.
 
 Credits:
 Special thanks to @jianchao.li.fighter for adding this problem and creating all test cases.
+https://goo.gl/CizU8W
 */
 
 class Solution {
