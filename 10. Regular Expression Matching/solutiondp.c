@@ -1,39 +1,42 @@
-class Solution {
+class Solution { 
 public:
-    bool isMatch(string s, string p) {
-        /**
-         * f[i][j]: if s[0..i-1] matches p[0..j-1]
-         * if p[j - 1] != '*'
-         *      f[i][j] = f[i - 1][j - 1] && s[i - 1] == p[j - 1]
-         * if p[j - 1] == '*', denote p[j - 2] with x
-         *      f[i][j] is true iff any of the following is true
-         *      1) "x*" repeats 0 time and matches empty: f[i][j - 2]
-         *      2) "x*" repeats >= 1 times and matches "x*x": s[i - 1] == x && f[i - 1][j]
-         * '.' matches any single character
-         */
-        int m = s.size(), n = p.size();
-        vector<vector<bool>> f(m + 1, vector<bool>(n + 1, false));
+    int minDistance(string word1, string word2) { 
+        int m = word1.length(), n= word2.length();
+        vector<vector<int>> dp(m+1, vector<int>(n+1, 0));
         
-        f[0][0] = true;
-        for (int i = 1; i <= m; i++)
-            f[i][0] = false;
-        // p[0.., j - 3, j - 2, j - 1] matches empty iff p[j - 1] is '*' and p[0..j - 3] matches empty
-        for (int j = 1; j <= n; j++)
-            f[0][j] = (j > 1) && ('*' == p[j - 1]) && (f[0][j - 2]);
+        //convert word2 to word1 if word2 is empty, so the operation is m times
+        //ex: word1: "ABCDE", word2= ""  
+        //notice: start from 1 because dp[i][j] denotes word1[0...i-1] are the same as word2[0...j-1]
+        for(int i= 1; i<= m; ++i)
+            dp[i][0] = i;
         
-        for (int i = 1; i <= m; i++)
-            for (int j = 1; j <= n; j++)
-                if (p[j - 1] != '*')
-                    f[i][j] = f[i - 1][j - 1] && (s[i - 1] == p[j - 1] || '.' == p[j - 1]);
-                    //f[i-1][j-1]: previous must be true
-                    //s[i-1] == p[j-1]: because the dp array starts from empty, 
-                    //                  the i-1, j-1 would be start from s[0], p[0]
-                    //'.' == p[j - 1]: if the pattern is '.', it matches any character
+        //convert word1 to word2 if word1 is empty, so the operation is n times
+        for(int i= 1; i<= n; ++i)
+            dp[0][i] = i;
+        
+        
+        for(int i = 1; i<= m; ++i){
+            for(int j= 1; j<= n; ++j){
+                if(word1[i-1] == word2[j-1])
+                    dp[i][j] = dp[i-1][j-1];
                 else
-                    // p[0] cannot be '*' so no need to check "j > 1" here
-                    f[i][j] = f[i][j - 2] || (s[i - 1] == p[j - 2] || '.' == p[j - 2]) && f[i - 1][j];
+                    //replace: means till the dp[i-1][j-1] is the same, add 1 operation by replacement
+                    //  example: word1: "ABCDE", word2: "ABCDF" 
+                    //           therefore, only needs to 1 move based on dp[i-1][j-1]
                     
+                    //deletion: the question is convert from word1 to word2, 
+                    //          means till the dp[i-1][j] is the same, add 1 ...
+                    //  example: word1: "ABCDE", word2: "ABCD". i=4 j=3
+                    //           add 1 move based on dp[i-1][j]
+                    
+                    //insertion: the question is convert from word1 to word2, 
+                    //          means till the dp[i][j-1] is the same, add 1 ...
+                    //  example: word1: "ABCD", word2: "ABCDE". i=3 j=4
+                    //           add 1 move based on dp[i][j-1]
+                    dp[i][j] = min(dp[i-1][j-1]+1, min(dp[i-1][j]+1, dp[i][j-1]+1));
+            }
+        }
         
-        return f[m][n];
+        return dp[m][n];
     }
 };
