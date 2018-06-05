@@ -32,7 +32,7 @@ public:
             if(i > pos && nums[i] == nums[i-1]) continue;
             tmp.push_back(nums[i]);
             backtrack(res, tmp, nums, i+1); //this is the major difference, need to throw in i, instead of pos
-            tmp.resize(tmp.size()-1);
+            tmp.pop_back());
         }
     }
 };
