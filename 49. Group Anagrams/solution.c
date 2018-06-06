@@ -22,7 +22,7 @@ public:
         unordered_map<string, multiset<string>> map;
         for(auto s: strs){
             string tmp = s; 
-            sort(tmp.begin(), tmp.end()); 
+            sort(tmp.begin(), tmp.end());  //use the sorted string as key to store every similar strings
             map[tmp].insert(s);
         }
         

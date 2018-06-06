@@ -41,7 +41,6 @@ rotate the input matrix in-place such that it becomes:
 ]
 */
 
-
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
