@@ -28,7 +28,7 @@ public:
         ListNode *first = &dummy, *second = &dummy;
         
         while(n-- >0 && first->next)
-            first= first->next;
+            first= first->next; //create a distance from head to fisrt that is equal to n
         
         
         while(first && first->next){
