@@ -54,7 +54,7 @@ class Solution {
 public:
     vector<TreeNode*> generateTrees(int n) {
         if(n == 0) return vector<TreeNode*>();
-        return genTree(1,n);
+        return genTree(1,n); //stores the value from 1...n
     }
     
     vector<TreeNode*> genTree(int start, int end){
