@@ -24,7 +24,7 @@ Note: Recursive solution is trivial, could you do it iteratively?
  */
 class Solution {
 public:
-    vector<int> inorderTraversal(TreeNode *root) {
+    vector<int> inorderTraversal(TreeNode* root) {
         vector<int> vector;
         stack<TreeNode *> stack;
         TreeNode *pCurrent = root;
@@ -33,11 +33,13 @@ public:
         {
             if(pCurrent)
             {
+                //put this node in stack, because it's not yet the leftest node
                 stack.push(pCurrent);
                 pCurrent = pCurrent->left;
             }
             else
             {
+                //pCurrent is null, either every node in stack or we're at the leftest NULL
                 TreeNode *pNode = stack.top();
                 vector.push_back(pNode->val);
                 stack.pop();
