@@ -33,7 +33,7 @@ public:
     {
         if(root == NULL) return;
         if(ret.size() == depth)
-            ret.push_back(vector<int>());
+            ret.push_back(vector<int>()); //add a new layer
 
         ret[depth].push_back(root->val);
         buildVector(root->left, depth + 1);
