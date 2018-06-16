@@ -18,7 +18,8 @@ In this case, no transaction is done, i.e. max profit = 0.
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        
+        //the key idea is: if we can find a lower price and a higher peak that brings more profit in coming, 
+        //then previous max_profit must not be the result max_profit
         if(prices.size()<2)
             return 0;
         
