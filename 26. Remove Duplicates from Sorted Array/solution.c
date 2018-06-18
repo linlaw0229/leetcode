@@ -10,13 +10,12 @@ public:
         int n= nums.size();
         if(n <2) return n;
         
-        int count = 0;
+        int count = 0; //count duplicate length
         for(int i = 1; i < n; i++){
             if(nums[i] == nums[i-1]) count++;
             else nums[i-count] = nums[i];
         }
-        return n-count;
-            
+        return n-count;// return length of non-duplicate elements
     }
 };
 
