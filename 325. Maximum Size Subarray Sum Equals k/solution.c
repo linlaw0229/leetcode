@@ -21,7 +21,7 @@ Can you do it in O(n) time?
 class Solution {
 public:
     int maxSubArrayLen(vector<int>& nums, int k) {
-        unordered_map<int, int> sums;
+        unordered_map<int, int> sums; //<sum, index>
         int cur_sum= 0;
         int max_len= 0;
         
@@ -29,7 +29,11 @@ public:
             cur_sum += nums[i];
             if(cur_sum == k)
                 max_len= i+1;
-            else if(sums.find(cur_sum-k) != sums.end()) //found
+            else if(sums.find(cur_sum-k) != sums.end()) 
+        //for a cur_sum, if we can find a previous value that after deduct it the sum would be k, then we can update the max_len
+        //example:
+        //cur_sum: 10, k=7
+        //if we can find a previous_sum is 3, then the max length would be start from previous_sum to i
                 max_len= max(max_len, i-sums[cur_sum-k]);
             
             if(sums.find(cur_sum) == sums.end())
