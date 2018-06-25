@@ -28,3 +28,6 @@ public:
         return sell;
     }
 };
+
+//buy[i] = max(sell[i-2]-price, buy[i-1])
+//sell[i] = max(buy[i-1]+price, sell[i-1])
