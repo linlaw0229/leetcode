@@ -19,13 +19,15 @@ public:
     int coinChange(vector<int>& coins, int amount) {
         int max = amount +1; //max is all 1;
         
-        vector<int> dp(max, max);
+        vector<int> dp(max, max); //dp[i]: min. coins when money is i
         dp[0] = 0;
         
         for(int i = 1; i<= amount; ++i){
             for(int j=0; j<coins.size(); ++j){
                 if(coins[j]<=i)
-                    dp[i] = min(dp[i], dp[i-coins[j]]+1);
+                    dp[i] = min(dp[i], dp[i-coins[j]]+1); 
+                    //i-coins[j] means we substract the amount of coins[j]
+                    //dp[i-coins[j]+1]: we need to find how many coins the remainder after substracting coins[j] will use
             }
         }
         return dp[amount] > amount ? -1 : dp[amount];
