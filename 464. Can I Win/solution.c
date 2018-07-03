@@ -48,7 +48,9 @@ public:
         for(int i= 0; i< length; i++){
             int cur= (1<< i); //ith number to check
             if((cur & used == 0)){ //not used
-                if(total <= i+1 || !canWin(length, total- (i+1), cur|used, m)){ //add already used number to cur through or(|) mask
+                if(total <= i+1 || !canWin(length, total- (i+1), cur|used, m)){ 
+                    //add already used number to cur through or(|) mask
+                    //total <= i+1: we can achieve target by i+1(+1 is because we start from 0)
                     m[used]= true;
                     return true;
                 }
