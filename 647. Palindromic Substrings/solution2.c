@@ -4,8 +4,8 @@ public:
     int countSubstrings(string s) {
         int res= 0;
         for(int i= 0; i< s.length(); i++){
-            expand(s, i, i);
-            expand(s, i, i+1);
+            expand(s, i, i); //count if center is s[i]
+            expand(s, i, i+1); //count if center is between s[i] and s[i+1]
         }
         return count;
     }
