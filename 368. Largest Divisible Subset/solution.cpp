@@ -21,6 +21,7 @@ public:
         sort(nums.begin(), nums.end());
         
         vector<int> dp(nums.size(), 0), parent(nums.size(), 0);
+        //dp[i]: start from ith element, the length of longest subset
         int max= 0;
         int max_idx= 0;
         
