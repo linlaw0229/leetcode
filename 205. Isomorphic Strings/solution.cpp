@@ -18,18 +18,17 @@ Example 3:
 Input: s = "paper", t = "title"
 Output: true
 */
-
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        int m1[256] = {-1}, m2[256] = {-1}, n = s.size();
+        int m1[256] = {0}, m2[256] = {0}, n = s.size();
         //use two int array to denote the latest use of a character's position
         //the index can see as 'a'-'0'
         for (int i = 0; i < n; ++i) {
-            if (m1[s[i]] != m2[t[i]]) return false; //because we traverse from start to end, the occurrence of that character must be the same
-            m1[s[i]] = i; //store the last use of that character
-            m2[t[i]] = i;
+            if (m1[s[i]] != m2[t[i]]) return false;
+            m1[s[i]] = i+1; //use i+1 is because when the i is equal to 0, update map value to i can not determine the char is different or not. becuase the default value is zero. Therefore, we need to update the value to i+1.
+            m2[t[i]] = i+1;
         }
         return true;
-    }
+    }  
 };
