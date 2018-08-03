@@ -21,7 +21,7 @@ Explanation:
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        //similar to single number, use XOR to find difference between two string
+        //similar to single number, use XOR to find difference between two
         char res= 0;
         for(auto c: s) res^= c;
         for(auto c: t) res^= c;
